@@ -88,7 +88,7 @@ mysqli_close($conn);
                             <?php while ($user = mysqli_fetch_assoc($result_users)) : ?>
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     <?php echo $user['username']; ?>
-                                    <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                                    <form method="POST" action="">
                                         <input type="hidden" name="user_id" value="<?php echo $user['id']; ?>">
                                         <button type="submit" name="delete_user" class="btn btn-danger btn-sm">Sil</button>
                                     </form>
@@ -108,7 +108,7 @@ mysqli_close($conn);
                             <?php while ($topic = mysqli_fetch_assoc($result_topics)) : ?>
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     <?php echo $topic['topic_title']; ?>
-                                    <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                                    <form method="POST" action="">
                                         <input type="hidden" name="topic_id" value="<?php echo $topic['id']; ?>">
                                         <button type="submit" name="delete_topic" class="btn btn-danger btn-sm">Sil</button>
                                     </form>
@@ -128,7 +128,7 @@ mysqli_close($conn);
                             <?php while ($message = mysqli_fetch_assoc($result_messages)) : ?>
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     <?php echo $message['message']; ?>
-                                    <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                                    <form method="POST" action="">
                                         <input type="hidden" name="message_id" value="<?php echo $message['id']; ?>">
                                         <button type="submit" name="delete_message" class="btn btn-danger btn-sm">Sil</button>
                                     </form>
