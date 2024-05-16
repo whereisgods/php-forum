@@ -139,7 +139,7 @@ mysqli_close($conn);
                     </div>
                 </div>
             </div>
-<div class="col-md-4">
+<div class="col-md-4 mb-4">
     <div class="card">
         <div class="card-header">
             <h1>Site düzenleme</h1>
@@ -178,6 +178,39 @@ mysqli_close($conn);
             // Şu anki durumu göster
             echo "<p><strong>Site Adı:</strong> " . file_get_contents("../../site.txt") . "</p>";
             echo "<p><strong>Favicon:</strong> " . file_get_contents("../../favicon.txt") . "</p>";
+            ?>
+        </div>
+    </div>
+</div>
+<div class="col-md-4">
+    <div class="card">
+        <div class="card-header">
+            <h1>Google Key Düzenleme</h1>
+        </div>
+        <div class="card-body">
+            <form method="post" action="">
+                <div class="form-group">
+                    <label for="newKey">Yeni Anahtar:</label>
+                    <input type="text" class="form-control" id="newKey" name="newKey" placeholder="Yeni anahtar">
+                </div>
+                <button type="submit" class="btn btn-primary">Key'i Güncelle</button>
+            </form>
+            <br>
+            <h3>Şu Anki Durum:</h3>
+            <?php
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                // Yeni anahtarı al
+                $newKey = $_POST["newKey"] ?? "";
+
+                // key.txt dosyasını düzenleme
+                ($keyFile = fopen("../../key.txt", "w")) or die("key.txt dosyası açılamadı!");
+                fwrite($keyFile, $newKey);
+                fclose($keyFile);
+                echo "<p><strong>Key güncellendi:</strong> $newKey</p>";
+            } else {
+                // Şu anki durumu göster
+                echo "<p><strong>Key:</strong> " . file_get_contents("../../key.txt") . "</p>";
+            }
             ?>
         </div>
     </div>

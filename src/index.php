@@ -64,6 +64,7 @@ function formatElapsedTime($timestamp) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="<?php echo file_get_contents('key.txt'); ?>" />
     <title>Hoş Geldiniz - <?php echo file_get_contents('site.txt'); ?></title>
     <link rel="icon" href="<?php echo file_get_contents('favicon.txt'); ?>">
     <!-- Bootstrap CSS dosyasını ekleyin -->
