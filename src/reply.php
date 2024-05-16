@@ -82,13 +82,13 @@ mysqli_close($conn);
                         }
                         ?>
 
-                        <form action="" method="POST">
+                        <form id="replyForm" action="" method="POST">
                             <input type="hidden" name="topic_id" value="<?php echo $topic_id; ?>">
                             <div class="form-group">
                                 <label for="message">Mesaj</label>
                                 <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
                             </div>
-                            <button type="submit" class="btn btn-primary">Cevap Yaz</button>
+                            <button type="submit" class="btn btn-primary" id="submitButton">Cevap Yaz</button>
                         </form>
                     </div>
                 </div>
@@ -99,5 +99,22 @@ mysqli_close($conn);
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Formun birden fazla gönderilmesini engellemek için spam koruması ekle
+        var formSubmitted = false;
+        document.getElementById("replyForm").addEventListener("submit", function(event) {
+            if (formSubmitted) {
+                event.preventDefault();
+                alert("Form zaten gönderildi, lütfen bekleyin.");
+            } else {
+                formSubmitted = true;
+                document.getElementById("submitButton").disabled = true;
+                setTimeout(function() {
+                    formSubmitted = false;
+                    document.getElementById("submitButton").disabled = false;
+                }, 5000); // 5 saniye beklet
+            }
+        });
+    </script>
 </body>
 </html>

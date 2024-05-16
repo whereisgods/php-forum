@@ -88,7 +88,7 @@ mysqli_close($conn);
                         Konu Oluştur
                     </div>
                     <div class="card-body">
-                        <form action="" method="POST">
+                        <form id="createTopicForm" action="" method="POST">
                             <div class="form-group">
                                 <label for="topic_title">Başlık</label>
                                 <input type="text" class="form-control" id="topic_title" name="topic_title" required>
@@ -108,5 +108,20 @@ mysqli_close($conn);
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Formun birden fazla gönderilmesini engellemek için spam koruması ekle
+        var formSubmitted = false;
+        document.getElementById("createTopicForm").addEventListener("submit", function(event) {
+            if (formSubmitted) {
+                event.preventDefault();
+                alert("Form zaten gönderildi, lütfen bekleyin.");
+            } else {
+                formSubmitted = true;
+                setTimeout(function() {
+                    formSubmitted = false;
+                }, 5000); // 5 saniye beklet
+            }
+        });
+    </script>
 </body>
 </html>
