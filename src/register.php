@@ -1,47 +1,62 @@
 <?php
-session_start();
-
+// Veritabanı bağlantısını yapılandırma
 include('connect.php');
 
+// Hata dizisi
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Kullanıcı adı ve şifre alınır
     $username = $_POST['username'];
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
 
+    // SQL enjeksiyonundan koruma için kullanıcı girdileri temizlenir
     $username = mysqli_real_escape_string($conn, $username);
     $password = mysqli_real_escape_string($conn, $password);
     $confirm_password = mysqli_real_escape_string($conn, $confirm_password);
 
+    // Alanların boş olup olmadığını kontrol edin
     if (empty($username) || empty($password) || empty($confirm_password)) {
         $errors[] = "Tüm alanları doldurun.";
     }
 
+    // Şifrelerin eşleşip eşleşmediğini kontrol edin
     if ($password !== $confirm_password) {
         $errors[] = "Şifreler eşleşmiyor.";
     }
 
+    // Hatalar yoksa, kullanıcıyı veritabanına ekleyin
     if (count($errors) === 0) {
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        // Kullanıcı adının benzersiz olup olmadığını kontrol edin
+        $query = "SELECT * FROM users WHERE username='$username'";
+        $result = mysqli_query($conn, $query);
 
-        $query = "INSERT INTO users (username, password) VALUES ('$username', '$hashed_password')";
-
-        if (mysqli_query($conn, $query)) {
-            // Kayıt başarılı, kullanıcıyı oturumla işaretleyin
-            $_SESSION['user_id'] = mysqli_insert_id($conn);
-
-            // Kullanıcıyı hoş geldiniz sayfasına yönlendirin
-            header("Location: ./");
-            exit();
+        if (mysqli_num_rows($result) > 0) {
+            $errors[] = "Bu kullanıcı adı zaten kullanılıyor. Lütfen farklı bir kullanıcı adı seçin.";
         } else {
-            $errors[] = "Kayıt sırasında bir hata oluştu: " . mysqli_error($conn);
+            // Şifreyi hashleyin ve veritabanına ekleyin
+            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+            $insert_query = "INSERT INTO users (username, password) VALUES ('$username', '$hashed_password')";
+
+            if (mysqli_query($conn, $insert_query)) {
+                // Kayıt başarılı, kullanıcıyı oturumla işaretleyin
+                $_SESSION['user_id'] = mysqli_insert_id($conn);
+
+                // Kullanıcıyı hoş geldiniz sayfasına yönlendirin
+                header("Location: ./");
+                exit();
+            } else {
+                $errors[] = "Kayıt sırasında bir hata oluştu: " . mysqli_error($conn);
+            }
         }
     }
 }
 
+// Veritabanı bağlantısını kapatma
 mysqli_close($conn);
 ?>
+
 <!DOCTYPE html>
 <html lang="tr">
 <head>
