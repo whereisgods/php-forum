@@ -184,7 +184,7 @@ mysqli_close($conn);
 </div>
         </div>
         <br>
-    <p>Eğer admin iseniz giriş yaptığınız halde kayıt ol ve giriş yap sayfalarına erişebilirsiniz.</p>
+    <p>Eğer admin iseniz her durumda her sayfaya erişebilirsiniz.</p>
      <p id="rastgeleSoz"></p>
          </div>
   <script>
