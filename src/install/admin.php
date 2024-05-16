@@ -26,6 +26,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     unlink($file); // Dosyayı sil
                 }
             }
+            // Oturumu ve çerezi temizle
+session_unset();
+session_destroy();
+setcookie("user_id", "", time() - 3600, "/", "", true, true);
             
             $errors[] = 'İşlemler tamam, artık dosyalar başarıyla silindi. <a href="../">Ana sayfaya dön</a>.';
         } else {
