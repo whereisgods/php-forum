@@ -12,8 +12,7 @@ $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
 // Statik sayfaları ekle
 $static_pages = array(
     "login.php",
-    "register.php",
-    "create.php"
+    "register.php"
 );
 
 foreach ($static_pages as $page) {
