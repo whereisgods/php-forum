@@ -177,7 +177,7 @@ mysqli_close($conn);
 
             // Şu anki durumu göster
             echo "<p><strong>Site Adı:</strong> " . file_get_contents("../../site.txt") . "</p>";
-            echo "<p><strong>Favicon Adı:</strong> " . file_get_contents("../../favicon.txt") . "</p>";
+            echo "<p><strong>Favicon:</strong> " . file_get_contents("../../favicon.txt") . "</p>";
             ?>
         </div>
     </div>
