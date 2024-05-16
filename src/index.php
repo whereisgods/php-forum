@@ -64,7 +64,8 @@ function formatElapsedTime($timestamp) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hoş Geldiniz</title>
+    <title>Hoş Geldiniz - <?php echo file_get_contents('site.txt'); ?></title>
+    <link rel="icon" href="<?php echo file_get_contents('favicon.txt'); ?>">
     <!-- Bootstrap CSS dosyasını ekleyin -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
@@ -97,7 +98,7 @@ function formatElapsedTime($timestamp) {
                 <div class="card-header">
                     <?php
                     if ($username !== "") {
-                        echo "Hoş Geldiniz, " . $username . "!";
+                        echo "Hoş Geldin, " . $username . "!";
                     } else {
                         echo "Hoş Geldiniz!";
                     }

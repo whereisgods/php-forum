@@ -43,7 +43,8 @@ setcookie("user_id", "", time() - 3600, "/", "", true, true);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Oluştur</title>
+    <title>Admin Oluştur - <?php echo file_get_contents('../site.txt'); ?></title>
+    <link rel="icon" href="<?php echo file_get_contents('../favicon.txt'); ?>">
     <style>
         .form-group {
             width: 350px;

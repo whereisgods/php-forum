@@ -43,7 +43,8 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $topic['topic_title']; ?></title>
+    <title><?php echo $topic['topic_title']; ?> - <?php echo file_get_contents('site.txt'); ?></title>
+    <link rel="icon" href="<?php echo file_get_contents('favicon.txt'); ?>">
     <!-- Bootstrap CSS dosyasını ekleyin -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>

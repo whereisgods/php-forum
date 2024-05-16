@@ -50,7 +50,8 @@ mysqli_close($conn);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Paneli</title>
+    <title>Admin Paneli - <?php echo file_get_contents('../../site.txt'); ?></title>
+    <link rel="icon" href="<?php echo file_get_contents('../../favicon.txt'); ?>">
     <!-- Bootstrap CSS dosyasını ekleyin -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
@@ -78,7 +79,7 @@ mysqli_close($conn);
 </nav>
     <div class="container mt-5">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4 mb-4">
                 <div class="card">
                     <div class="card-header">
                         <h1>Kullanıcılar</h1>
@@ -98,7 +99,7 @@ mysqli_close($conn);
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 mb-4">
                 <div class="card">
                     <div class="card-header">
                         <h1>Konular</h1>
@@ -118,7 +119,7 @@ mysqli_close($conn);
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 mb-4">
                 <div class="card">
                     <div class="card-header">
                         <h1>Mesajlar</h1>
@@ -138,12 +139,54 @@ mysqli_close($conn);
                     </div>
                 </div>
             </div>
+<div class="col-md-4">
+    <div class="card">
+        <div class="card-header">
+            <h1>Site düzenleme</h1>
+        </div>
+        <div class="card-body">
+            <form method="post" action="">
+                <div class="form-group">
+                    <label for="siteName">Site Adı:</label>
+                    <input type="text" class="form-control" id="siteName" name="siteName" placeholder="Yeni site adı">
+                </div>
+                <div class="form-group">
+                    <label for="faviconName">Favicon Adı:</label>
+                    <input type="text" class="form-control" id="faviconName" name="faviconName" placeholder="Yeni favicon adı">
+                </div>
+                <button type="submit" class="btn btn-primary">Kaydet</button>
+            </form>
+            <br>
+            <h3>Şu Anki Durum:</h3>
+            <?php
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                // Form verilerini al
+                $siteAdi = $_POST["siteName"] ?? "";
+                $faviconAdi = $_POST["faviconName"] ?? "";
+
+                // site.txt dosyasını düzenleme
+                ($siteFile = fopen("../../site.txt", "w")) or die("site.txt dosyası açılamadı!");
+                fwrite($siteFile, $siteAdi);
+                fclose($siteFile);
+
+                // favicon.txt dosyasını düzenleme
+                ($faviconFile = fopen("../../favicon.txt", "w")) or die("favicon.txt dosyası açılamadı!");
+                fwrite($faviconFile, $faviconAdi);
+                fclose($faviconFile);
+            }
+
+            // Şu anki durumu göster
+            echo "<p><strong>Site Adı:</strong> " . file_get_contents("../../site.txt") . "</p>";
+            echo "<p><strong>Favicon Adı:</strong> " . file_get_contents("../../favicon.txt") . "</p>";
+            ?>
         </div>
     </div>
-    <div class="container mt-5">
+</div>
+        </div>
+        <br>
     <p>Eğer admin iseniz giriş yaptığınız halde kayıt ol ve giriş yap sayfalarına erişebilirsiniz.</p>
      <p id="rastgeleSoz"></p>
-    </div>
+         </div>
   <script>
     var sozler = [
       "Hayatta en hakiki mürşit ilimdir.",
