@@ -8,12 +8,17 @@ if (!isset($_SESSION['user_id'])) {
 
 include('connect.php');
 
+// Parsedown kütüphanesini çağırın
+require_once 'Parsedown.php';
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $topic_title = $_POST['topic_title'];
     $message = $_POST['message'];
 
     $topic_title = mysqli_real_escape_string($conn, $topic_title);
-    $message = mysqli_real_escape_string($conn, $message);
+    // Markdown dönüşümü
+    $parsedown = new Parsedown();
+    $message = mysqli_real_escape_string($conn, $parsedown->text($message));
 
     $user_id = $_SESSION['user_id'];
 

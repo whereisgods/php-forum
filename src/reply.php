@@ -1,8 +1,11 @@
 <?php
 session_start();
 
+// Parsedown kütüphanesini dahil edin
+require 'Parsedown.php';
+
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login"); // Kullanıcı girişi yapılmamışsa, giriş sayfasına yönlendir
+    header("Location: login");
     exit();
 }
 
@@ -11,6 +14,10 @@ include('connect.php');
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $message = $_POST['message'];
     $topic_id = $_POST['topic_id'];
+
+    // Markdown'dan HTML'e dönüştür
+    $parsedown = new Parsedown();
+    $message = $parsedown->text($message);
 
     $message = mysqli_real_escape_string($conn, $message);
     $user_id = $_SESSION['user_id'];
@@ -24,7 +31,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Yeni mesajı ekleyin
     $query = "INSERT INTO messages (message, user_id, topic_id, username) VALUES ('$message', '$user_id', '$topic_id', '$username')";
     if (mysqli_query($conn, $query)) {
-        // Başarılı bir şekilde mesaj eklenmiş, kullanıcıyı konu sayfasına yönlendirin
         header("Location: topic.php?id=$topic_id");
         exit();
     } else {

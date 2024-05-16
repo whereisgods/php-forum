@@ -61,6 +61,14 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
             font-size: 14px;
             color: #999;
         }
+
+        .reply-button {
+            margin-top: 20px;
+        }
+
+        .footer {
+            margin-top: 50px;
+        }
     </style>
 </head>
 <body>
@@ -91,13 +99,13 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                 <h1><?php echo $topic['topic_title']; ?></h1>
                 <p><?php echo $topic['message_date']; ?></p>
                 <div class="message">
-                    <div class="message-content"><?php echo htmlspecialchars($topic['message']); ?></div>
+                    <div class="message-content"><?php echo $topic['message']; ?></div>
                     <div class="message-date"><?php echo htmlspecialchars($topic['username']); ?> - <?php echo $topic['message_date']; ?></div>
                 </div>
 
                 <?php
                 if (isset($_SESSION['user_id'])) {
-                    echo '<a href="reply?topic_id=' . $topic_id . '" class="btn btn-primary">Cevapla</a>';
+                    echo '<a href="reply?topic_id=' . $topic_id . '" class="btn btn-primary reply-button">Cevapla</a>';
                 }
                 ?>
 
@@ -107,7 +115,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                 if (!empty($messages)) {
                     foreach ($messages as $message) {
                         echo '<div class="message">';
-                        echo '<div class="message-content">' . htmlspecialchars($message['message']) . '</div>';
+                        echo '<div class="message-content">' . $message['message'] . '</div>';
                         echo '<div class="message-date">' . htmlspecialchars($message['username']) . ' - ' . $message['message_date'] . '</div>';
                         echo '</div>';
                     }
@@ -118,6 +126,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
             </div>
         </div>
     </div>
+    <div class="footer"></div> <!-- Sayfanın altında bir boşluk bırakmak için -->
     <!-- Bootstrap JS dosyasını ekleyin -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
