@@ -185,7 +185,7 @@ mysqli_close($conn);
 <div class="col-md-4">
     <div class="card">
         <div class="card-header">
-            <h1>Google Key Düzenleme</h1>
+            <h1>Google Key düzenleme</h1>
         </div>
         <div class="card-body">
             <form method="post" action="">
