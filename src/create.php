@@ -88,7 +88,7 @@ mysqli_close($conn);
                         Konu Oluştur
                     </div>
                     <div class="card-body">
-                        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+                        <form action="" method="POST">
                             <div class="form-group">
                                 <label for="topic_title">Başlık</label>
                                 <input type="text" class="form-control" id="topic_title" name="topic_title" required>

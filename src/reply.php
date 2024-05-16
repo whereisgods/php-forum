@@ -82,7 +82,7 @@ mysqli_close($conn);
                         }
                         ?>
 
-                        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+                        <form action="" method="POST">
                             <input type="hidden" name="topic_id" value="<?php echo $topic_id; ?>">
                             <div class="form-group">
                                 <label for="message">Mesaj</label>

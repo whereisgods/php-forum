@@ -92,7 +92,7 @@ mysqli_close($conn);
                         }
                         ?>
 
-                        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+                        <form action="" method="POST">
                             <div class="form-group">
                                 <label for="username">Kullanıcı Adı</label>
                                 <input type="text" class="form-control" id="username" name="username" required>
