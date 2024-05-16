@@ -92,7 +92,7 @@ mysqli_close($conn);
                         }
                         ?>
 
-                        <form action="" method="POST">
+                        <form id="loginForm" action="" method="POST">
                             <div class="form-group">
                                 <label for="username">Kullanıcı Adı</label>
                                 <input type="text" class="form-control" id="username" name="username" required>
@@ -116,6 +116,21 @@ mysqli_close($conn);
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Formun birden fazla gönderilmesini engellemek için spam koruması ekle
+        var formSubmitted = false;
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            if (formSubmitted) {
+                event.preventDefault();
+                alert("Form zaten gönderildi, lütfen bekleyin.");
+            } else {
+                formSubmitted = true;
+                setTimeout(function() {
+                    formSubmitted = false;
+                }, 5000); // 5 saniye beklet
+            }
+        });
+    </script>
 </body>
 </html>
 <?php
