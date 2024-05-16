@@ -56,7 +56,7 @@
 if (\$conn->connect_error) {
     die("Bağlantı hatası: " . \$conn->connect_error);
 }
-?>
+
 EOD;
                     if (fwrite($connect_file, $content) === false) {
                         echo '<div class="alert alert-danger">connect.php dosyasına yazılamadı.</div>';

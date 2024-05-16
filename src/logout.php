@@ -9,4 +9,3 @@ setcookie("user_id", "", time() - 3600, "/", "", true, true);
 // Kullanıcıyı çıkış sayfasına yönlendir
 header("Location: login");
 exit();
-?>
