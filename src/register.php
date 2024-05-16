@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['user_id'] = mysqli_insert_id($conn);
 
                 // Kullanıcıyı hoş geldiniz sayfasına yönlendirin
-                header("Location: ./");
+                header("Location: ./login");
                 exit();
             } else {
                 $errors[] = "Kayıt sırasında bir hata oluştu: " . mysqli_error($conn);
