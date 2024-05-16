@@ -24,7 +24,7 @@ foreach ($static_pages as $page) {
 }
 
 // Topic tablosundan veri çek
-$sql = "SELECT id, topic_date FROM topic";
+$sql = "SELECT id, topic_date FROM topics";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
