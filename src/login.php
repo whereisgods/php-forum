@@ -1,4 +1,15 @@
 <?php
+// Kullanıcı oturum kontrolü
+session_start();
+
+// Kullanıcı giriş yapmış mı kontrol edelim
+if(isset($_COOKIE['user_id'])) {
+    // Kullanıcı giriş yapmışsa, istediğiniz sayfaya yönlendirin
+    header("Location: ./"); // Örnek olarak dashboard sayfasına yönlendiriyoruz
+    exit();
+}
+?>
+<?php
 session_start(); // Oturumu başlat
 
 include('connect.php');
@@ -134,14 +145,3 @@ mysqli_close($conn);
     </script>
 </body>
 </html>
-<?php
-if (isset($_COOKIE['admin_cookie'])) {
-    // Eğer admin_cookie çerezi varsa, hiçbir şey yapma ve kodu burada sonlandır
-    exit();
-}
-
-if (isset($_SESSION['user_id']) || isset($_COOKIE['user_id'])) {
-    header("Location: ./"); // Kullanıcı zaten giriş yapmışsa veya çerez varsa yönlendir
-    exit();
-}
-?>
